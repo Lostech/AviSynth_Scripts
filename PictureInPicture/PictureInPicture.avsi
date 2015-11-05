@@ -1,6 +1,6 @@
 /*
 Avisynth Script:	PictureInPicture.avsi
-Version:			1.0
+Version:			1.0b
 Copyright:			© Lostech 2015
 Homepage:			www.lostech.de.vu
 					www.github.com/lostech
@@ -24,7 +24,7 @@ Function API:		PictureInPicture(clip Master, clip Slave, int Quadrant, float Sca
 					* clip TopLeft		= MultiPicture clip for top left PiP window, set to "BlankClip(length=0)" for hiding this PiP window
 					* clip TopRight		= MultiPicture clip for top right PiP window, set to "BlankClip(length=0)" for hiding this PiP window
 					* clip BottomLeft	= MultiPicture clip for bottom left PiP window, set to "BlankClip(length=0)" for hiding this PiP window
-					* clip BottomRight	= MultiPicture clip for bottom right PiP window
+					* clip BottomRight	= MultiPicture clip for bottom right PiP window, set to "BlankClip(length=0)" for hiding this PiP window
 					* clip Center		= MultiPicture clip for center PiP window
 					* Scalefactor		= floating value between >0.01 and <1
 										  for the scale of the PiP window compared to the master width
@@ -33,7 +33,7 @@ Function API:		PictureInPicture(clip Master, clip Slave, int Quadrant, float Sca
 					
 Remarks:			* All slave/PiP videos will be scaled to master video size maintaining aspect ratio by adding black bars (aka letterbox/pillarbox).
 					  If you want those videos without black bars then resize them to master video size before calling PiP/PaP functions.
-					* Only master video will play audio, all other input clip will be muted.
+					* Only master video will play audio, all other input clips will be muted.
 					* For hiding a PiP window in MultiPictureInPicture set the according video clip to "BlankClip(length=0)"
 					* For hiding a PaP window in MultiPictureAndPicture set the according video clip to "BlankClip(<clip Master>)"
 					* Scalefactor values lower than ~0.02 may lead to a script failure due to PiP video sized to zero depending on master video size
@@ -85,6 +85,9 @@ function MultiPictureInPicture(clip Master, clip TopLeft, clip TopRight, clip Bo
 
 	#limit scalefactor to base value if > 1
 	Scalefactor=(Scalefactor > 1)?Eval("""return 0.4"""):Scalefactor
+	
+	#limit scalefactor to base value if < 0.01 (more or less to prevent zero size)
+	Scalefactor=(Scalefactor < 0.01)?Eval("""return 0.4"""):Scalefactor
 	
 	#new size for slave calculated by maximum master width * scale factor
 	TopLeft=LanczosResize(TopLeft, Round(Master.Width * Scalefactor), Round(Round(Master.Width * Scalefactor) * TopLeft.Height / TopLeft.Width))
@@ -180,8 +183,3 @@ function MultiPictureAndPicture(clip Master, clip TopRight, clip BottomLeft, cli
 	return StackVertical(TopRow, BottomRow)
 }
 __end__ #of script
-
-	bx=TopRow.Width
-	by=int(float(bx) / (BottomRow.Width / BottomRow.Height))
-	by=((by / 2) * 2)
-	BottomRow=LanczosResize(BottomRow, bx, by)

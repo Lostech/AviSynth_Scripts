@@ -6,7 +6,7 @@ Import("PictureInPicture.avsi")
 /*---------------------------------------*/
 #define FPS
 ClipFPS=25
-#defince number of frames
+#define number of frames
 ClipLength=50
 /*---------------------------------------*/
 
