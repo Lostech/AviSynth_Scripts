@@ -19,6 +19,10 @@ PictureInPicture:	plugin with several Picture-in-Picture (PiP) and Picture-and-P
 Remark:
 Keep in mind that these scripts are no professional effect filters and work is still in progress. ;)
 
+Forum discussion:
+http://lostech.bplaced.net/viewtopic.php?f=18&t=3585
+
+
 
 
 
