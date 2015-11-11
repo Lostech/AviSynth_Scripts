@@ -16,6 +16,8 @@ DollyZoom_V2:		an effect which creates a simplified DollyZoom with 3 shifted pla
 
 PictureInPicture:	plugin with several Picture-in-Picture (PiP) and Picture-and-Picture (PaP) functions (smiliar to TV PiP/PaP)
 
+TextOverlay:		text overlay functions for e.g. for titles or subtitles
+
 Remark:
 Keep in mind that these scripts are no professional effect filters and work is still in progress. ;)
 
