@@ -21,6 +21,12 @@ TextOverlay:		text overlay functions for e.g. for titles or subtitles
 Remark:
 Keep in mind that these scripts are no professional effect filters and work is still in progress. ;)
 
+
+Helper utilities:
+
+AVS_Test:			Helper batch file for display AviSynth error outputs in case of AVS script errors etc.
+
+
 Forum discussion:
 http://lostech.bplaced.net/viewtopic.php?f=18&t=3585
 
